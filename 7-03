@@ -1,0 +1,234 @@
+
+
+local physics = require( "physics" )
+
+
+
+physics.start()
+
+physics.setGravity( 0, 25 ) -- ( x, y )
+
+
+
+
+
+local theGround = display.newImageRect( "land.png", 10000, 100)
+
+theGround.x = display.contentCenterX 
+
+theGround.y = display.contentHeight
+
+theGround.id = "the ground"
+
+physics.addBody( theGround, "static", { 
+
+    friction = 0.5, 
+
+    bounce = 0.3 
+
+    } )
+
+
+
+local theGround = display.newImageRect( "pipe.png", 100, 100)
+
+theGround.x = display.contentCenterX 
+
+theGround.y = display.contentHeight - 100
+
+theGround.id = "the ground"
+
+physics.addBody( theGround, "static", { 
+
+    friction = 0.5, 
+
+    bounce = 0.3 
+
+    } )
+
+
+
+
+local theCharacter = display.newImageRect( "tank.png", 200, 200 )
+
+theCharacter.x = display.contentCenterX + 100
+
+theCharacter.y = display.contentCenterY
+
+theCharacter.id = "the character"
+
+physics.addBody( theCharacter, "dynamic", { 
+
+    density = 3.0, 
+
+    friction = 0.5, 
+
+    bounce = 0.3 
+
+    } )
+
+
+
+local dPad = display.newImageRect( "d-pad.png", 100, 100 )
+
+dPad.x = 100
+
+dPad.y = display.contentHeight - 60
+
+dPad.alpha = 0.50
+
+dPad.id = "d-pad"
+
+
+
+local upArrow = display.newImageRect( "upArrow.png", 25, 25 )
+
+upArrow.x = 100
+
+upArrow.y = display.contentHeight - 100
+
+upArrow.id = "up arrow"
+
+
+
+local downArrow = display.newImageRect( "downArrow.png", 25, 25 )
+
+downArrow.x = 100
+
+downArrow.y = display.contentHeight - 20
+
+downArrow.id = "down arrow"
+
+
+
+local leftArrow = display.newImageRect( "leftArrow.png", 25, 25 )
+
+leftArrow.x = 60
+
+leftArrow.y = display.contentHeight - 60
+
+leftArrow.id = "left arrow"
+
+
+
+local rightArrow = display.newImageRect( "rightArrow.png", 25, 25 )
+
+rightArrow.x = 140
+
+rightArrow.y = display.contentHeight - 60
+
+rightArrow.id = "right arrow"
+
+ 
+
+function upArrow:touch( event )
+
+    if ( event.phase == "ended" ) then
+
+        -- move the character up
+
+        transition.moveBy( theCharacter, { 
+
+        	x = 0, -- move 0 in the x direction 
+
+        	y = -50, -- move up 50 pixels
+
+        	time = 100 -- move in a 1/10 of a second
+
+        	} )
+
+    end
+
+
+
+    return true
+
+end
+
+
+
+function downArrow:touch( event )
+
+    if ( event.phase == "ended" ) then
+
+        -- move the character up
+
+        transition.moveBy( theCharacter, { 
+
+        	x = 0, -- move 0 in the x direction 
+
+        	y = 50, -- move up 50 pixels
+
+        	time = 100 -- move in a 1/10 of a second
+
+        	} )
+
+    end
+
+
+
+    return true
+
+end
+
+
+
+function leftArrow:touch( event )
+
+    if ( event.phase == "ended" ) then
+
+        -- move the character up
+
+        transition.moveBy( theCharacter, { 
+
+        	x = -50, -- move 0 in the x direction 
+
+        	y = 0, -- move up 50 pixels
+
+        	time = 100 -- move in a 1/10 of a second
+
+        	} )
+
+    end
+
+
+
+    return true
+
+end
+
+
+
+function rightArrow:touch( event )
+
+    if ( event.phase == "ended" ) then
+
+        -- move the character up
+
+        transition.moveBy( theCharacter, { 
+
+        	x = 50, -- move 0 in the x direction 
+
+        	y = 0, -- move up 50 pixels
+
+        	time = 100 -- move in a 1/10 of a second
+
+        	} )
+
+    end
+
+
+
+    return true
+
+end
+
+
+
+upArrow:addEventListener( "touch", upArrow )
+
+downArrow:addEventListener( "touch", downArrow )
+
+leftArrow:addEventListener( "touch", leftArrow )
+
+rightArrow:addEventListener( "touch", rightArrow )
